@@ -1,0 +1,9 @@
+# vim
+**.swp
+
+# cpp
+**.out
+
+cachegrind.*
+
+
