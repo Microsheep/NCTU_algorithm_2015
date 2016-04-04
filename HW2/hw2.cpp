@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <algorithm>
 #include <msgpack.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -25,8 +26,9 @@ int main(void) {
     result.get().convert(num_tests);
 
     msgpack::sbuffer sbuf;
+    
     vector<int> NUMBERS;
-    for(int k=0; k<num_tests; k++){
+    while(num_tests--){
         msgpack::unpack(result, buf, st.st_size, off);
         result.get().convert(NUMBERS);
         sort(NUMBERS.begin(), NUMBERS.end());
