@@ -30,7 +30,7 @@ int main(void) {
     msgpack::sbuffer sbuf;
     
     string pattern;
-    string words[30];
+    string words[26];
     vector<string> items;
     while(num_tests--){
         msgpack::unpack(result, buf, st.st_size, off);
@@ -59,11 +59,14 @@ int main(void) {
             }
         }
         
+        int ans;
         if(flag){
-            msgpack::pack(&sbuf, 0);
+            ans=0;
+            msgpack::pack(&sbuf, ans);
         }
         else{
-            msgpack::pack(&sbuf, 1);
+            ans=1;
+            msgpack::pack(&sbuf, ans);
         }
     
     }
