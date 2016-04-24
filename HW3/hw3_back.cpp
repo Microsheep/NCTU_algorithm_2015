@@ -30,35 +30,31 @@ int main(void) {
     msgpack::sbuffer sbuf;
     
     string pattern;
-    string words[30];
     vector<string> items;
-    set<string> test;
     while(num_tests--){
         msgpack::unpack(result, buf, st.st_size, off);
         result.get().convert(pattern);
         msgpack::unpack(result, buf, st.st_size, off);
-        result.get().convert(items);
-        
-        test.clear();
+        result.get().convert(items); 
 
         bool flag=false;
+        string words[26];
         
         if(pattern.length()==items.size()){
-            for(int a=0;a<26;a++){
-                words[a]="";
-            }
             for(int a=0;a<(int)pattern.length();a++){
                 int now=pattern[a]-'a';
                 if(words[now]==""){
-                    if(test.find(items[a])==test.end()){
-                        words[now]=items[a];
-                        test.insert(items[a]);
-                        continue;
+                    for(int b=0;b<26;b++){
+                        if(items[a]==words[b]){
+                            flag=true;
+                            break;
+                        }
                     }
-                    else{
-                        flag=true;
+                    if(flag){
                         break;
                     }
+                    words[now]=items[a];
+                    continue;
                 }
                 else if(words[now]==items[a]){
                     continue;
