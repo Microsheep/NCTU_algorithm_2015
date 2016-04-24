@@ -44,6 +44,15 @@ int main(void) {
             for(int a=0;a<(int)pattern.length();a++){
                 int now=pattern[a]-'a';
                 if(words[now]==""){
+                    for(int b=0;b<26;b++){
+                        if(items[a]==words[b]){
+                            flag=true;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        break;
+                    }
                     words[now]=items[a];
                     continue;
                 }
@@ -54,13 +63,6 @@ int main(void) {
                     flag=true;
                     break;
                 } 
-            }
-            sort(words,words+26);
-            for(int a=0;a<25;a++){
-                if(words[a]==words[a+1]&&words[a]!=""){
-                    flag=true;
-                    break;
-                }
             }
         }
         else{
