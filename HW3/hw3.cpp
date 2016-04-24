@@ -37,44 +37,41 @@ int main(void) {
         msgpack::unpack(result, buf, st.st_size, off);
         result.get().convert(items); 
 
-        bool flag=false;
+        int ans=1;
         string words[26];
+        
+        int n=0;
+        int tests[26];
         
         if(pattern.length()==items.size()){
             for(int a=0;a<(int)pattern.length();a++){
                 int now=pattern[a]-'a';
-                if(words[now]==""){
-                    for(int b=0;b<26;b++){
-                        if(items[a]==words[b]){
-                            flag=true;
-                            break;
+                if((int)words[now].length()==0){
+                    for(int b=0;b<n;b++){
+                        if(items[a]==words[tests[b]]){
+                            ans=0;
+                            goto OUT;
                         }
                     }
-                    if(flag){
-                        break;
-                    }
                     words[now]=items[a];
+                    tests[n++]=a;
                     continue;
                 }
                 else if(words[now]==items[a]){
                     continue;
                 }
                 else{
-                    flag=true;
+                    ans=0;
                     break;
                 } 
             }
         }
         else{
-            flag=true;
+            ans=0;
         }
-
-        if(flag){
-            msgpack::pack(&sbuf, 0);
-        }
-        else{
-            msgpack::pack(&sbuf, 1);
-        }
+        
+        OUT:
+        msgpack::pack(&sbuf, ans);
     
     }
     
