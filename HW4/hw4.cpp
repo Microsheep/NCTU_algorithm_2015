@@ -5,7 +5,7 @@
 #include <msgpack.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
-#define MAX_node 100000
+#define MAX_node 200000
 #define NEGINF -999999999ll
 using namespace std;
 
@@ -16,7 +16,7 @@ struct node{
     long long r_max=0; 
 };
 
-node seg_tree[MAX_node*2];
+node seg_tree[MAX_node];
 vector<long long> items;
 
 void build_tree(int x, int start, int end){
@@ -44,12 +44,10 @@ node seg_q(int x, int start, int end, int a, int b){
         return seg_tree[x];
     }
     else if(b<=mid){
-        node n=seg_q(2*x,start,mid,a,b);
-        return n;
+        return seg_q(2*x,start,mid,a,b);
     }
     else if(a>mid){
-        node n=seg_q(2*x+1,mid+1,end,a,b);
-        return n;
+        return seg_q(2*x+1,mid+1,end,a,b);
     }
     else{
         node tmp;
