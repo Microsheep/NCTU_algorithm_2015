@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <set>
+#include <unordered_set>
 #include <msgpack.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -63,7 +63,7 @@ int main() {
         operand.push_back(tmp);
         int n=(int)operand.size();
 
-        set <int> dp[n][n];
+        unordered_set <int> dp[n][n];
         
         for(int a=0;a<n;a++){
             dp[0][a].insert(operand[a]);
