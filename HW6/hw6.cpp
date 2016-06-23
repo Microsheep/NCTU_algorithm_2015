@@ -20,12 +20,16 @@ bool cmp(circle a, circle b){
 }
 
 int main(){
+    FILE *f_in, *f_out;
+    f_in = fopen("./input.txt", "r");
+    f_out = fopen("./output.txt", "w");
+
     int n,l,w;
-    while(~scanf("%d %d %d",&n,&l,&w)){
+    while(~fscanf(f_in,"%d %d %d",&n,&l,&w)){
         circle cir[n];
         double sqrtrw,rw,ww=w/2.0,w2=ww*ww;
         for(int a=0;a<n;a++){
-            scanf("%d %d",&cir[a].pos,&cir[a].rad);
+            fscanf(f_in,"%d %d",&cir[a].pos,&cir[a].rad);
             if(cir[a].rad<ww){
                 cir[a].lpos=0;
                 cir[a].rpos=0;
@@ -70,8 +74,10 @@ int main(){
             ans = -1;
         }
 
-        cout << ans << endl;
+        fprintf(f_out,"%d\n",ans);
     }
+    fclose(f_in);
+    fclose(f_out);
     return 0;
 }
 
