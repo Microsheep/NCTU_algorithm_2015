@@ -11,12 +11,7 @@ struct circle{
 };
 
 bool cmp(circle a, circle b){
-    if(a.lpos==b.lpos){
-        return a.rpos<b.rpos;
-    }
-    else{
-        return a.lpos<b.lpos; 
-    }
+    return a.lpos<b.lpos; 
 }
 
 int main(){
