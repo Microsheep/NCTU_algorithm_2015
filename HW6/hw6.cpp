@@ -48,28 +48,43 @@ int main(){
         for(int a=0;a<n;a++){
             if(cir[a].lpos<=now){
                 maxx=max(maxx,cir[a].rpos);
-                continue;
+                if(a!=n-1){
+                    continue;
+                }
+                else{
+                    if(maxx>now){
+                        now=maxx;
+                        ans++;
+                    }
+                }
             }
             else{
                 if(maxx>now){
-                    if(maxx>l){
+                    now=maxx;
+                    maxx=0;
+                    ans++;
+                    if(now>=l){
                         break;
                     }
-                    now=maxx;
-                    ans++; 
+                    if(a!=n-1){
+                        a--;
+                    }
+                    else{
+                        if(cir[n-1].lpos<=now){
+                            maxx=max(maxx,cir[n-1].rpos);
+                            if(maxx>now){
+                                now=maxx;
+                                ans++;
+                            }
+                        }
+                    }
                 }
-                if(a!=n-1){
-                    a--;
+                else{
+                    break;
                 }
             }
         }
         
-        maxx=max(maxx,cir[n-1].rpos);
-        if(maxx>now){
-            now=maxx;
-            ans++;
-        }
-
         if(now<l){
             ans = -1;
         }
